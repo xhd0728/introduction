@@ -1,0 +1,147 @@
+{
+  "main": {
+    "id": "38f1af4f3586af2a",
+    "type": "split",
+    "children": [
+      {
+        "id": "cbdebac4c42e46ef",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4362372b68700b71",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "9ef2a7dc47368cc9",
+    "type": "split",
+    "children": [
+      {
+        "id": "288ebd51e6dce1e2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cc708f7ec0c59eb5",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "978259abe87b05f8",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "8de0c99dfceb9921",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "6b347375acaf577b",
+    "type": "split",
+    "children": [
+      {
+        "id": "099e3acb66f69c10",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e0950b43e5d82307",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "e2960067a32b7557",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "ca3d21f9045b1c41",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "84aedcaccda73b64",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "4362372b68700b71",
+  "lastOpenFiles": [
+    "_posts/知识点/【知识点】TF-IDF算法.md",
+    "_posts/技术学习/使用Vscode调试Linux内核.md",
+    "_posts/技术学习/使用虚拟机进行基于vscode的Linux内核调试.md"
+  ]
+}
