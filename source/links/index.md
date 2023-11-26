@@ -24,6 +24,7 @@ date: 2023-10-08
 - Chunhao Yang ( ICT，Chinese Academy, Beijing )
 - Qingran Yang ( HIT, Harbin, Heilongjiang)
 - [Xiaojun Ye ( ZJU, Hangzhou, Jiangsu )](https://scholar.google.com/citations?hl=zh-CN&user=BKMYsm4AAAAJ)
+- Xianyu Zhang ( HEU, Harbin, Heilongjiang )
 - Wentao Zhou ( NWPU, Xi'an, Shaanxi)
 - Zhitong Zhou ( SDU, Qingdao, Shandong)
 

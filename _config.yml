@@ -69,3 +69,7 @@ permalink: posts/:abbrlink.html
 abbrlink:
   alg: crc32
   rep: hex
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
