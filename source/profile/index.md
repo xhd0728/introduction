@@ -5,11 +5,11 @@ date: 2017-09-01
 
 # 学术背景
 
-|时间|学校|专业/研究方向|
+|时间|学校|学院/系|
 |:----|:----|:----|
-|2017.09 - 2020.06|黑龙江省伊春市第一中学|理科(物化生)|
-|2020.09 - 2024.07(在读)|[哈尔滨工程大学](http://www.hrbeu.edu.cn)|[计算机科学与技术](http://cstc.hrbeu.edu.cn)|
-|2024.09 - 2027.07|[东北大学(沈阳, 中国)](https://www.neu.edu.cn)|NLP, Information Retrieval|
+|2017.09 - 2020.06|[黑龙江省伊春市第一中学](https://baike.baidu.com/item/%E9%BB%91%E9%BE%99%E6%B1%9F%E7%9C%81%E4%BC%8A%E6%98%A5%E5%B8%82%E7%AC%AC%E4%B8%80%E4%B8%AD%E5%AD%A6/6441968)|理科(物化生)|
+|2020.09 - 2024.07(在读)|[哈尔滨工程大学](http://www.hrbeu.edu.cn)|[计算机科学与技术学院](http://cstc.hrbeu.edu.cn)|
+|2024.09 - 2027.07|[东北大学(沈阳, 中国)](https://www.neu.edu.cn)|[计算机科学与工程学院](http://www.cse.neu.edu.cn/main.htm)|
 ||
 
 # 学习成绩
