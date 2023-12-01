@@ -4,7 +4,7 @@ tag:
   - PyTorch
   - 机器学习
 category:
-  - 工具学习
+  - 技术学习
 lang: zh-CN
 copy_from: 'https://blog.csdn.net/xhyu61/article/details/133643860'
 abbrlink: 7a1e28a0
