@@ -1,0 +1,312 @@
+---
+title: Universal-Guided-Diffusion
+tag:
+  - 计算机视觉
+  - 扩散模型
+category:
+  - 论文学习
+lang: zh-CN
+copy_from: 'https://blog.csdn.net/xhyu61/article/details/134752205'
+toc: true
+abbrlink: 23f23e19
+date: 2023-12-02 00:00:00
+---
+
+典型的扩散模型经过训练以接受特定形式的条件作用（最常见的是文本），并且如果不经过重新训练就不能接受其他形式的条件的作用。
+这项工作中提出了一种通用制导算法(universal guidance algorithm)，使扩散模型能够通过任意制导方式进行控制。
+实验表明该算法成功生成了具有引导功能的高质量他想，包括分割(segmentation)，人脸识别(face recognition)，对象检测(object detection)，分类器信号(classifier signals)。
+
+<!--more-->
+
+原文代码：github.com/arpitbansal297/Universal-Guided-Diffusion
+
+# 1 Introduction
+
+扩散模型是生成图像的强大工具，当今大多数扩散模型都是通过调节，从头开始构建扩散模型来控制的，以接受用户输入的特定形式。调节本身很强大，但是会导致模型受到单一模式的束缚，有新需求后需要重新从头开始训练一个新的模型，代价很大。
+
+控制模型输出的更灵活的办法是使用guidance. 这种方法下，扩散模型充当通用的图像生成器，不再需要理解用户的需求。用户将该模型与guidance配对，以衡量是否满足某些标准。如：可以指导模型最小化生成的图像和用户选择的文本描述之间的CLIP分数。
+图像创建过程中，每次迭代期间，迭代都会沿着guidance的梯度向下推动，让最终的图像满足用户的需求。
+
+本文中，研究了guidance指导方法，使任何现成的模型或损失函数都可以用作guidance。因为guidance函数无需重新训练或修改，这种形式的guidance具有普遍性，因为它使扩散模型能够适应于任何目的。
+从用户的角度看，guidance优于调节的方式，因为guidance让扩散模型变成一个能够进行多种用途的通用图像生成器。不幸的是人们普遍不认为这个可行。早期的扩散模型依赖于分类器的指导，后来很快转向了无分类器的方案，该方案需要使用无法更改的特定冻结本体从头开始对模型进行类标签训练。 
+
+使用guidance的困难源自于采样过程中使用的噪声图像与训练guidance模型之间的域差距(domain gap)。当这个差距缩小时，guidance就会表现得很好。例如，成功使用CLIP模型引导，但前提是使用噪声输入重新开始训练CLIP。噪声的重新训练可以缩小domain gap，但是在财力和工程上代价很高。为避免额外的成本，本文通过改变抽样方案而不是改变模型的方式缩小domain gap。
+
+总结本文的贡献：
+
+1. 提出了一种能够为扩散模型提供通用的guidance的方法。本文提出的采样器(sampler)仅在去噪图像上评估模型，而不是在潜在噪声状态上评估。这样可以缩小困扰标准guidance方法的domain gap。这个策略为最终用户提供了许多使用guidance模式甚至同时使用多种模式的灵活性。底层扩散模型保持固定，无需进行任何类型的微调。
+2. 演示了不同限制下这种方法的效果，包括分类器标签(classifier labels)，人物身份(human identities)，分割图(segmentation maps)，来自对象检测器的注释(annotations from object detectors)，还有由逆线性问题(inverse linear problems)产生的约束。
+
+![](https://github.com/arpitbansal297/Universal-Guided-Diffusion/raw/main/stable-diffusion-guided/data/images/all_cover_figure.png)
+
+图1：由现成的网络作为guidance的扩散
+
+# 2 Background
+
+首先简要回顾扩散模型背后核心框架的最新文献，然后定义受控图像生成的问题的设置并讨论了先前的相关工作。
+
+## 2.1 Diffusion Models 扩散模型
+
+扩散模型在很多领域都展现了强大的图像生成能力。
+
+我们正式引入（无条件）扩散，这有助于描述不同类型模型的细微差别。
+一个扩散模型可以被定义为$T$步正向过程和$T$步反向过程。从概念上讲，正向过程逐渐将不同幅度的高斯噪声添加到干净的图像$z_0$，反向过程尝试对噪声输入进行去噪，希望恢复成干净的数据点。
+更具体地，给定表示噪声的尺度 $\alpha_{t_{t=1}^T}$ 的标量数组和一个干净的图像 $z_0$ ，将前向过程的 $t$ 个步骤应用于 $z_0$ 会产生一个噪声数据
+$$z_t=\sqrt{\alpha_t}z_0+(\sqrt{1-\alpha_t})\epsilon,\ \epsilon\sim\mathcal{N}(0, \mathbf{I})$$
+一个扩散模型学习了一个去噪网络$\epsilon_\theta$，对于每一个$(z_0,t)$的对和任何一个样本$\epsilon$，都有
+$$\epsilon_\theta(z_t,t)\approx\epsilon=\frac{z_t-\sqrt{\alpha_t}z_0}{\sqrt{1-\alpha_t}}$$
+相反的过程采用 $q(z_{t-1}|z_t,z_0)$ 的形式，有很多种具体的定义，其中 $q(\cdot|\cdot)$ 通常参数化为高斯分布。不同的工作研究了 $q(z_{t-1}|z_t,z_0)$ 的不同近似值，如DDIM采用如下方法预测干净样本：
+
+$$\hat{z}_0=\frac{z_t-(\sqrt{1-\alpha_t})\epsilon_\theta(z_t,t)}{\sqrt{\alpha_t}}$$
+
+然后用预测出来的 $\hat{z}_0$，利用 $q(z_{t-1}|z_t,\hat{z}_0)$ 采样 $z_{t-1}$ 。
+
+虽然各个采样方法的细节各不相同，每一种采样方法都是基于当前的样本 $z_t$ ，步数 $t$ ，预测的噪声 $\hat{\epsilon}$ 来预测 $z_{t-1}$ 。简便起见，定义这个过程为 $z_{t-1}=S(z_t,\hat{\epsilon},t)$ 。
+
+## 2.2 Controlled Image Generation 受控图像生成
+
+本文关注具有各种约束的受控图像生成。考虑一个可微引导函数(guidance function) $f$，如CLIP特征提取器或一个分割网络。当应用于图像时，得到一个向量$c=f(x)$。还考虑一个函数$\mathit{l}(\cdot, \cdot)$，用于衡量$c$和$c'$的接近程度。给定一个特定选择$c$，我们称之为prompt，相应的约束(基于$c,\mathit{l},f$)被形式化为$\mathit{l}(c,f(z))\approx 0$，目标是从图像分布中生成一个满足约束的样本$z$。
+换言之，想要生成一个与prompt相匹配的图像。
+
+> 分割网络(segmentation network)：是一种深度学习模型，专门用于图像分割任务。图像分割是计算机视觉领域中的重要任务，其目标是将输入图像中的每个像素标记为属于预定义类别的一个区域，从而将图像分解成具有语义信息的区域。
+
+之前的研究将受控扩散生成图像分为两个分类。称第一类为条件图像生成(conditional image generation)，第二类是引导图像生成(guided image generation)。
+
+### 2.2.1 Conditional Image Generation 条件图像生成
+
+这一类的方法需要将prompt作为额外的输入训练新的扩散模型。比如：
+
+- _Classifier-free diffusion guidance_ (arXiv:2207.12598)提出classifier-free guidance使用类别作为prompt，通过去噪网络的无条件和条件输出之间的线性插值来训练扩散模型。
+- _Cold diffusion: Inverting arbitrary image transforms without noise_ (arXiv:2208.09392)研究了引导函数是已知线性退化算子(linear degradation operator)，并训练了条件模型来解决线性逆问题。
+- _Towards photorealistic image generation and editing with text-guided diffusion models_ (arXiv:2112.10741)进一步扩展了classifier-free guidance，用描述性词汇作为prompt，以文本条件生成图像(text-conditional image generation)，然后训练一个扩散模型去提高生成的图像的CLIP表示和文本提示之间的相似性。
+  这些方法在不同类型的约束下都是成功的，但是重新训练扩散模型的要求使得它们的计算量很大。 
+
+>线性退化算子(linear degradation operator)：通常是指在信号处理或图像处理中用于模拟信号或图像因受到特定系统或过程影响而发生退化的操作。这个算子通常被用来描述信号或图像在传输、采集或处理过程中所经历的变化或损失。线性退化算子可以通过数学方式表示，并被用于生成模拟退化的信号或图像，以便进行处理算法的测试、评估和改进。
+
+
+>CLIP表示(CLIP Representation)：CLIP模型为文本和图像所学习到的特征表示。这些表示被设计为能够捕捉文本描述和图像内容之间的语义相关性，即相似的文本和图像在表示空间中距离较近，而不相似的文本和图像在表示空间中距离较远。
+
+
+### 2.2.2 Guided Image Generation 引导图像生成
+
+这一类生成采用冻结的预训练扩散模型作为基础模型，但是修改采样方法来通过引导函数的反馈指导图像生成。本文的方法属于这一类。先前的工作是通过各种限制和外部引导函数来实现的。举例来说：
+
+- _Diffusion models beat gans on image synthesis_ (arXiv:2105.05233)提出了classifier guidance，在不同噪声尺度的图像上训练分类器作为引导函数$f$，包括了采样过程中分类器的梯度。但是，噪声图像的分类器是特定于domain的，通常不容易获得。本文的方法规避了这个问题。
+- _Zero-shot image restoration using denoising diffusion null-space model_ (arXiv:2212.00490)假设外部引导函数为线性算子，并利用基础模型生成位于线性算子零空间的图像分量。然而扩展该方法来处理非线性引导功能并非易事。
+- _Diffusion posterior sampling for general noisy inverse problems_ (arXiv:2209.14687)研究了一般的引导函数，在预期去噪图像上计算的引导函数的梯度，以此来修改采样过程。尽管如此，作者仅给出了更简单的非线性引导函数（如非线性模糊）的结果。
+
+> 非线性模糊(Non-linear Blurring)：一种图像处理技术，与传统的线性模糊（如高斯模糊）不同，它使用非线性方法来模糊图像，改变图像的外观或增强图像的某些特征。在非线性模糊中，模糊效果可能不是均匀的，不同部分的图像可能会受到不同程度或不同方式的模糊处理。这种模糊方法可能更适合于某些图像或场景，因为它可以保留一些细节或特定的图像特征，同时模糊其他部分。
+
+本文的工作研究通用引导算法(universal guidance algorithm)，用于使用任何现成的引导函数通过扩散模型生成引导图像，如目标监测或分割网络。
+
+# 3 Universal Guidance
+
+本文提出了一种引导算法，增强了扩散模型的图像采样方法，以包括来自现成辅助网络的引导。
+本算法的灵感来自于经验观察，即通过Eq.3获得的重建感性图像$z_0$。虽然不完美，但仍然适合通用引导，以提供信息反馈来指导图像生成。
+
+- 3.1节，通过扩展分类器引导来激发本文的前向通用引导(forward universal guidance)，以利用这种观察并处理通用引导功能。
+- 3.2节，提出了一种补充性后向通用引导(backward universal guidance)，以帮助强制生成的图像满足基于引导函数$f$的约束。
+- 3.3节，讨论了一种简单但有用的自递归技巧，能够凭借经验提高生成图像的保真度。
+
+## 3.1 Forward Universal Guidance 前向通用引导
+
+为了通过外部引导函数$f$和损失函数$\mathit{l}$作为信息引导生成，一个直接想法是扩展分类器引导以接受一般引导功能。
+更具体地，给定类别prompt $c$ ，分类器引导在每一步采样 $S(z_t,t)$ 中用下式(Eq.4)替换 $\epsilon_\theta(z_t,t)$ 来执行分类引导采样：
+
+$$\hat{\epsilon}_\theta(z_t,t)=\epsilon_\theta(z_t,t)-\sqrt{1-\alpha_t}\nabla_{z_t} \log p(c|z_t)$$
+
+定义 $\mathit{l}_{ce}(\cdot,\cdot)$ 为交叉熵损失(cross-entropy loss)， $f_{cl}$ 为引导函数，输出类别的概率，Eq.4可以改写成：
+
+$$\hat{\epsilon}_\theta(z_t,t)=\epsilon_\theta(z_t,t)+\sqrt{1-\alpha_t}\nabla_{z_t} \mathit{l}_{ce}(c,f_{cl}(z_t))$$
+
+注： $\log p(c|z_t)$和$-\mathit{l}_{ce}(c,f_{cl}(z_t))$ 在数值上并不相等，但是都是用于衡量和目标标签 $c$ 的差距，所以起到的作用是相同的。
+
+直接用任何现成的引导函数和损失函数替换 $f_{cl}$ 和 $\mathit{l}_{ce}$ 在实践中行不通，因为 $f$ 很可能是在干净图像上训练的，输入有噪声的图像无法提供有意义的指导。这时我们可以利用 $\epsilon_\theta(z_t,t)$ 预测添加到数据点的噪声，然后可以用Eq.3来获得一个预测的干净噪声 $\hat{z}_0$ 。这里建议根据预测的干净数据的点计算指导：
+
+$$\hat{\epsilon}_\theta(z_t,t)=\epsilon_\theta(z_t,t)+s(t)\cdot\nabla_{z_t} \mathit{l}(c,f(\hat{z}_0))$$
+
+$s(t)$ 控制每一步的引导强度，
+
+$$\nabla_{z_t} \mathit{l}(c,f(\hat{z}_0))=\nabla_{z_t}\mathit{l}(c,f(\frac{z_t-\sqrt{1-\alpha_t}\epsilon_\theta(z_t,t)}{\sqrt{\alpha_t}}))$$
+
+（这一步就是 $\hat{z}_0$ 用Eq.3替换）
+用Eq.6来表示前向引导。
+在实践中，应用前向引导有效地使生成的图像更接近prompt，同时保持数据流中的生成轨迹。
+_Diffusion posterior sampling for general noisy inverse problems._ (arXiv:2209.14687)也是相关的方法，引导步长是基于 $E[z_0|z_t]$ 计算的。这个方法从基于分数的生成框架中获取灵感，但导致了不同的更新办法。
+
+## 3.2 Backward Universal Guidance 反向通用引导
+
+如4.2节会展示的，前向引导有时会过分优先考虑维持图像的真实性，导致没能满足给定的prompt。简单增加引导强度$s(t)$并不是最优的，因为这通常会导致不稳定，图像离开簇(manifold)的速度比降噪器校正它的速度快。
+为了解决这个问题，提出后向通用引导(后向引导)，以补充前向引导并帮助强制生成的图像满足约束。
+后向引导的关键思想是根据 $\hat{z}_0$ 优化干净图像，使其最适合prompt，然后在步骤 $t$ 将引导变化线性转换回噪声图像空间。
+
+具体地，不是直接计算 $\nabla_{z_t}\mathit{l}(c,f(\hat{z}_0))$ ，而是计算干净数据空间中的引导变化 $\Delta z_0$ ：
+
+$$\Delta z_0=\arg \min_{\Delta} \mathit{l}(c,f(\hat{z}_0+\Delta))$$
+
+求解Eq.7，采用 $m$ 步梯度下降，其中使用 $\Delta=0$ 作为起点。当 $\hat{z}_0+\Delta z_0$ 将 $\mathit{l}(c,f(z))$ 最小化时， $\Delta z_0$ 是干净数据空间内最符合限制的变动。然后将 $\Delta z_0$ 变换回到第 $t$ 步的噪声数据空间中，通过计算满足Eq.8的引导去噪预测 $\tilde{\epsilon}$ ：
+
+$$z_t=\sqrt{\alpha_t}(\hat{z}_0+\Delta z_0)+\sqrt{1-\alpha_t}\tilde{\epsilon}$$
+
+使用Eq.3，可以重写 $\tilde{\epsilon}$ 作为原始去噪预测 $\epsilon_\theta(z_t,t)$ 的增强：
+
+$$\tilde{\epsilon}=\epsilon_\theta(z_t,t)-\sqrt{\alpha_t/(1-\alpha_t)}\Delta z_0$$
+
+相比于前向引导，反向引导(如Eq.9)为生成图像提供了一个优化方向以匹配给定的prompt，因此优先考虑符合约束条件。此外，计算Eq.7的梯度的步长的成本比计算前向传播Eq.6要小，而且我们可以用多步梯度下降来求解Eq.7，进一步提高与给定prompt的匹配度。
+
+## 3.3 Per-step Self-recurrence 逐步自递归
+
+当我们将通用引导加到普通的生成pipeline中时，我们发现生成的图像和自然图像相比具有很奇怪的特征。我们尝试通过减少 $s(t)$ 来优先考虑真实性，但没有效果。尤其在复杂的引导函数情况下，既能保证真实性，又能满足引导限制的方法并不总是存在。我们猜想，由通用方法产生的引导方向并不总和真实性挂钩，尤其是在引导函数产生了过多信息损失的时候，这导致了图像逐步脱离了生成真实性图像的正轨。
+
+为了解决问题，本文应用了逐步自递归(per-step self-recurrence)。更具体地，当 $z_{t-1}=S(z_t,\hat{\epsilon}_t,t)$ 被采样后，我们向 $z_{t-1}$ 重新注入随机高斯噪声 $\epsilon{'}\sim \mathcal{N}(0,\mathbf{I})$ ，以此获得 $z_t^{'}$ ：
+
+$$z_t^{'}=\sqrt{\alpha_t/\alpha_{t-1}}\cdot z_{t-1}+\sqrt{1-\alpha_t/\alpha_{t-1}}\cdot\epsilon^{'}$$
+
+Eq.10保证了在第 $t$ 步中 $z_t^{'}$ 具有合适的噪声尺度。在采样第 $t-1$ 步时，我们重复进行自递归 $k$ 次。
+
+直观地说，自递归过程允许在相同的噪声尺度下，不断探索数据簇中的不同区域，允许使用更多的计算资源去找到一个既满足引导约束又保证图像质量的解决方案。
+经验上来说，我们发现自递归过程可以在给定合适引导强度 $s(t)$ 以生成符合prompt的图像时保证足够的真实性。
+
+图2展示了自递归对生成图像带来的作用。
+
+![](https://cdn.jsdelivr.net/gh/xhd0728/oss-github-picgo-repository/picgo/20231202162635.png)
+
+图2：自递归过程在分割图像生成的应用。最左边的图像是给定的分割map，后面三个是自递归步数分别为1，4，10的结果。
+
+我们在算法1中总结了通用引导算法（前向通用引导、反向通用引导、逐步自递归）。为了简单起见，算法1假设引导函数只有1个，但是可以轻易改成具有多对$(f,l)$。此外，前向和后向引导的目标不必相同，允许以不同的方式同时利用多种引导功能。
+
+> 算法1：通用引导
+> Parameter: 自递归步数$k$, 反向引导梯度步数$m$, 引导强度$s(t)$
+> Required: 从N(0,1)采样的$z_T$，扩散模型$\epsilon_\theta$，噪声尺度$\{\alpha_t\}_{t=1}^T$，引导函数$f$，损失函数$l$，prompt $c$
+> for $t=T, T-1,\cdots,1$ do  (T步去噪)
+> 	for $n=1,2,\cdots,k$ do  (k步自递归)
+> 		利用Eq.3计算$\hat{z}_0$
+> 		利用前向通用扰动Eq.6计算$\hat{\epsilon}_\theta$
+> 		if $m>0$ then
+> 			使用$m$步梯度下降，求得最小化$Eq.7$的$\Delta z_0$
+> 			使用Eq.9计算反向通用扰动 ($\hat{\epsilon}_\theta\leftarrow\hat{\epsilon}_\theta-\sqrt{\alpha_t/(1-\alpha_t)}\Delta z_0$)
+> 		end if
+> 		$z_{t-1}\leftarrow S(z_t,\hat{\epsilon}_\theta,t)$
+> 		$\epsilon^{'}\sim\mathcal{N}(0,I)$
+> 		$z_t\leftarrow\sqrt{\alpha_t/\alpha_{t-1}}z_{t-1}+\sqrt{1-\alpha_t/\alpha_{t-1}}\epsilon^{'}$
+> 	end for
+> end for
+
+# 4 Experiments
+
+本节展示了本文提出的通用引导算法在各种引导函数上的测试结果。具体地，在Stable Diffusion(一种基于文本条件生成的扩散模型)进行了实验，也在一个在ImageNet上训练的完全无条件的扩散模型上做了对比（使用了OpenAI提供的预训练模型）进行了实验。需要注意的是，Stable Diffusion也可以进行无条件的生成，只需要给定的文本是一个空字符串。
+
+- 4.1节是使用不同引导函数在Stable Diffusion上做的实验结果
+- 4.2节是在ImageNet上训练的扩散模型的实验结果
+
+## 4.1 Results for Stable Diffusion
+
+本节将Stable Diffusion作为基础模型。实验中用到的引导函数由CLIP特征提取器，一个分割网络，脸部识别网络和目标检测网络。实验中发现应用前向引导足以产生符合给定prompt的高质量图像，因此设置$m=0$。为了对Stable Diffusion进行前向引导，我们将通过Eq.3计算出的潜变量前向给Stable Diffusion的图像解码器去获得预测的干净图像。下面的每个小节将讲述实验结果与对应的实现细节。
+
+### 4.1.1 CLIP Guidance
+
+CLIP是由OpenAI开发的目前最好的文本到图像的生成模型。为了将我们的算法应用到文本引导的图像生成，我们使用了CLIP的特征提取器作为引导函数。我们利用对于给定prompt得到的图像嵌入与CLIP文本嵌入之间的负余弦相似度构建损失函数。使用$s(t)=10\sqrt{1-\alpha_t}$、$k=8$，使用Stable Diffusion作为无条件图像生成器。
+
+> 文本到图像相似度模型(text-to-image similarity model)：是一种可以衡量文本描述和图像内容之间相似性的模型。这种模型的目标是理解自然语言描述（如句子、短语或段落）与对应图像之间的语义关联，并为它们分配一个相似度得分或概率。
+
+> 余弦相似度(Cosine Similarity)：是衡量两个非零向量之间相似度的一种度量方式。它衡量的是两个向量的夹角的余弦值，范围在$[-1, 1]$之间，值越接近 1 表示两个向量越相似，值越接近 -1 表示两个向量越不相似。$Similarity(A,B)=\frac{A\cdot B}{||A||\ ||B||}$
+
+我们使用一定数量的文本prompt作为引导生成图像。为了更好地评估我们的通用引导算法并对比各种条件和引导，我们还用Stable Diffusion，用与输入相同的prompt生成了经典的(classical)、文字条件的(text-conditional)两种生成方式生成图像，然后将总结的结果放在图3。
+
+![](https://cdn.jsdelivr.net/gh/xhd0728/oss-github-picgo-repository/picgo/20231202162753.png)
+
+图3：我们比较了通用引导算法和从头开始训练的文本条件模型之间匹配给定文本prompt的能力。结论表明，通用指导算法在生成满足文本约束的高质量图像的能力方面可以和专门的条件模型相媲美。
+
+### 4.1.2 Segmentation Map Guidance
+
+为了使用分割图作为prompt来引导图像生成，我们使用带有分割头的MobileNetV3-Large，以及Pytorch中公开可用的预训练模型。分割网络输出每一个元素的分类概率，我们通过对给定prompt和生成的图像的预测分割之间的逐像素交叉熵损失，并对每个像素求和，来构建损失函数 $l$ 。我们设置 $s(t)=400\cdot\sqrt{1-\alpha_t}$ ， $k=10$ 。
+
+实验中我们将不同形状对象的分割图与新的prompt结合起来。我们使用文本prompt作为Stable Diffusion的固定附加输入来执行文本条件采样，并引导文本条件生成的图像匹配给定的分割图。结果在图4中展示。从图4中可以看出，生成的图像在目标和北京之间有一个明显的边界，并且几乎完美地符合了给定的分割图。生成的目标和背景也依旧符合描述的文本（如狗的品种和环境的描述）。而且生成的图像都很逼真。
+
+![](https://cdn.jsdelivr.net/gh/xhd0728/oss-github-picgo-repository/picgo/20231202162938.png)
+
+图4：除了匹配文本prompt以外，还由图像分割管道引导。每列包含为匹配prompt生成的图像示例和最左侧列中的分割图。最上面的行包含在没有引导的情况下生成的示例。
+
+### 4.1.3 Face Recognition Guidance
+
+为了引导图像生成以模仿特定人的脸部，我们编写了一个结合了人脸检测模块和人脸识别模块的引导功能。此设置从输入面部图像生成面部属性嵌入。我们使用多任务级联卷积网络(multi-task cascaded convolutional networks, MTCNN)作为人脸检测模块，使用facenet作为人脸识别模块。
+引导函数$f$裁剪出检测到的面部并输出面部属性嵌入作为prompt，同时使用$l_1$-loss作为嵌入之间的损失函数。
+需要注意的是，为了计算算法中的引导方向，我们仅通过facenet进行反向传播，并将MTCNN生成的面部裁剪掩模视为MTCNN的oracle输入。因为MTCNN使用不可微分的非极大值抑制。
+这个实验中我们设置 $s(t)=20000\cdot\sqrt{1-\alpha_t}$ ， $k=2$ 。
+
+> 多任务卷积神经网络(Multi-task Cascaded Convolutional Neural Network)：一种用于人脸检测和对齐的神经网络模型。
+
+> Oracle输入(Oracle input)：通常用于描述一种理想化的情况或者模型的假设，即在某些特定情况下，系统或模型能够获得完美、准确的信息。具体来说，在机器学习或算法设计中，“Oracle 输入”指的是一个假设的输入源，它可以提供对于某个问题的最优解或者真实答案。这种理想化的输入源可以为算法提供完美的信息，使其能够在没有任何错误或者不确定性的情况下进行决策或者预测。
+> 在实际情况下，"Oracle 输入"通常被用作理论上的思考工具或者是对比实验中的基准。
+
+我们探索了面部引导和文本prompt的不同组合方式。与分割图任务相似，我们使用文本prompt作为Stable Diffusion的固定附加调节，使用我们的算法引导此文本条件轨迹，以便生成的图像中的面部看起来和面部prompt相似。图5中，我们清晰地看出，在生成的图像上，给定面部prompt的面部特征被重现得非常完美。背景、材质或风格得描述性文本也能正确实现，并与生成的面孔完美融合。
+
+![](https://cdn.jsdelivr.net/gh/xhd0728/oss-github-picgo-repository/picgo/20231202163036.png)
+
+图5：除了匹配文本prompt，这些图像还由面部识别系统引导。每列包含为匹配prompt而生成的图像示例以及最左列中图像的标识。最上面的行包含在没有指导的情况下生成的示例。
+
+### 4.1.4 Object Location Guidance
+
+对于Stable Diffusion，我们使用目标检测网络引导生成图像同样获得了不错的结果。实验中，我们使用带有Resnet-50-FPN的backbone的Faster-RCNN，以及Pytorch中公开可用的预训练模型作为目标检测器。我们使用带有类别标签的边界框作为目标位置prompt。我们使用三个独立的损失的和构建损失函数$l$。这三个损失分别为：
+
+- 锚分类损失(anchor classification loss)
+- 边界框回归损失(bounding box regression loss)
+- 区域标签分类损失(region label classification)
+  其中锚分类损失和边界框回归损失在区域建议头(region proposal head)计算，区域标签分类损失在区域分类头(region classification head)计算。
+  需要注意：和基础的R-CNN的训练对比，我们丢掉了额外的区域分类头中的边界框对齐损失(bounding box alignment loss)。
+  我们发现这种损失构建帮助我们在每一个prompt指定的位置上都生成了正确类别目标。
+  我们设置 $s(t)=100\cdot\sqrt{1-\alpha_t}$ ， $k=3$ 。
+
+> 区域建议头(region proposal head)：深度学习目标检测模型中的一个组件，通常出现在一种流行的架构中，叫做Faster R-CNN。在Faster R-CNN中，整个模型被分为两个主要部分：一个用于生成候选区域(Region Proposal Network，RPN)，另一个用于分类和精细调整这些提议的区域(Region Classification and Regression Head)。
+> 区域建议头是指对这些候选区域进行进一步处理的部分，它接受候选区域作为输入，并对其进行分类（识别区域内的对象类别）和回归（精细调整候选区域的位置）。这一部分的输出是最终目标检测框架的一部分，用于确定每个提议区域内是否包含目标以及它们的确切位置。
+
+> 区域分类头(region classification head)：是目标检测模型中的一个组件，通常用于对提议的候选区域进行目标分类。它接受提议的区域作为输入，并对其内部的物体或目标进行识别分类。通常，这个组件会采用卷积神经网络（CNN）或其他类型的神经网络结构，将候选区域中的特征映射到各个可能的类别上。
+
+> 边界框对齐损失(bounding box alignment loss)：是目标检测任务中用于训练模型的损失函数之一。这种损失函数旨在帮助模型准确地预测目标边界框的位置。它衡量模型预测的边界框和真实标签之间的差异，并尝试最小化这种差异，以便模型能够更精确地预测目标的位置。
+
+我们使用了不同的文本prompt和目标位置prompt的组合又进行了实验，用同样的方法使用文本prompt作为Stable Diffusion的矫正条件。使用通用引导算法，我们基于给定的文本prompt和位置prompt生成了多个图像，结果展示在图6。从图6中可以看出，由描述文本指定的目标都出现在指定的位置框当中，并且具有给定边界框指示的适当尺寸。每一个位置都被生成的高质量图像合适地填充，与各种图像内容prompt保持一致。
+
+![](https://cdn.jsdelivr.net/gh/xhd0728/oss-github-picgo-repository/picgo/20231202163125.png)
+
+图6：除了匹配prompt之外，这些图像还由对象检测器引导。每列包含为匹配prompt生成的图像示例以及用于引导的边界框。顶行包含在没有引导的情况下生成的示例。
+
+### 4.1.5 Style Guidance
+
+最终，基于一张风格图像作为风格参考，通过引导图像生成让Stable Diffusion生成图像来结束整个实验。通过CLIP的图像特征提取器从风格图像中捕获参考风格，使用生成的图像嵌入作为prompt。损失函数计算生成图像的嵌入和风格图像的嵌入之间的负余弦相似度。与之前的实验类似，使用文本输入作为Stable Diffusion的固定条件来控制生成的内容。我们对不同的风格图像和不同的文本prompt进行组合进行了多项实验，结果见图7。从图7可以看出，生成的图像的内容和给定的文本prompt相似，展示的风格和给定的风格图像相近。实验中我们设置$s(t)=6\cdot\sqrt{1-\alpha_t}$，$k=6$。
+
+更进一步，为了控制内容量，我们设置了尺度$\gamma$，Stable Diffusion中用来平衡文本条件生成和非文本条件生成的平衡尺度。每列分别设置为3.0, 3.0, 4.0。
+
+![](https://cdn.jsdelivr.net/gh/xhd0728/oss-github-picgo-repository/picgo/20231202163214.png)
+
+图7：除了匹配文本prompt，这些图像被风格图像所引导。每一列包含匹配文本prompt和用于引导的风格图像的生成的图像。第一行的生成示例没有受到风格引导。
+
+## 4.2 Results for ImageNet Diffusion
+
+本节展示了使用在ImageNet上训练的无条件扩散模型上的引导图像生成。我们在目标位置引导和混合引导图像引导生成任务上做了实验，称为分割引导修复(segmentation-guided inpainting)。我们还在附录中提供了使用CLIP guidance的其他实验。我们会分别讨论每个guidance的结果。
+
+> 分割引导修复(segmentation-guided inpainting)：一种图像修复技术，结合了图像分割和修复方法，以在图像中去除或填补缺失的部分。基本思想是利用图像分割算法来识别和定位图像中需要修复的区域，并利用图像修复或补全技术来填补这些区域。通常情况下，首先使用图像分割算法（如语义分割模型）对图像进行处理，识别出需要修复的部分，然后针对这些区域使用图像修复算法来进行修复或填补，使其外观自然并与周围的环境相匹配。
+
+### 4.2.1 Object Location Guidance
+
+和Stable Diffusion的实验很像，我们使用同样的网络结构和同样的预训练模型作为目标检测网络，构建一个相同的损失函数$l$。但是，和Stable Diffusion不同的是，目标位置是可用于引导生成的唯一的prompt。
+在这个实验中，我们设置 $s(t)=100\sqrt{1-\alpha_t}$ ， $k=3$ 。我们使用了不同的目标位置prompt：
+
+- 只有前向通用引导
+- 既有前向通用引导，又有反向通用引导
+  从图8可以观察到既有前向通用引导，又有反向通用引导的生成方式更加逼真，也更加符合prompt。另一方面，如果只有前向通用引导，生成的图像保留了逼真，但是和prompt的类别和位置不太匹配。这个结果演示了我们通用引导算法的有效性，也证明了反向引导的必要性。
+
+![](https://cdn.jsdelivr.net/gh/xhd0728/oss-github-picgo-repository/picgo/20231202163247.png)
+
+图8：使用无条件的 ImageNet 模型进行目标检测引导的生成。同时使用前向和后向引导生成的图像逼真，并且在指定的位置具有所需的物体。相比之下，仅使用前向引导生成的图像展示出错误类别的物体或位置/大小不准确。
+
+### 4.2.2 Sgementation-Guided Inpainting
+
+本实验中，我们的目标是探索我们的算法能否掌控多种引导函数。我们将修复遮罩(inpainting mask)，分类器(classifier)和一个分割网络(segmentation network)组合组合在一起进行引导生成。我们首先生成了带有遮罩区域的图像作为prompt。然后，我们选择一个物体类别 c 作为分类的提示，并生成一个分割掩码，其中被掩盖的区域被视为同一类别 $c$ 的前景对象。对非掩码区，使用 $l_2$ 损失作为修复的损失函数，并将 $s(t)=0$ ，或者等价地仅使用反向引导进行修复。我们使用与4.1描述的分割网络相同的结构，设置 $s(t)=200\sqrt{1-\alpha_t}$ 。对于分类引导，我们使用接受噪声输入的分类器，并执行原始分类器来引导Eq.4，来代替前向指引。结果在图9中展示。 可以看出，使用inpainting和分类器作为引导，我们的算法生成的图像既逼真，又能满足inpainting prompt，并被正确分类。添加分割引导后，我们的算法和分割图、修复prompt都近乎完美匹配，同时保持真实感，进一步改进了生成的图像。这表明我们的算法可以有效结合各个引导功能的反馈。
+
+![](https://cdn.jsdelivr.net/gh/xhd0728/oss-github-picgo-repository/picgo/20231202163325.png)
+
+图9：我们的引导算法可以整合来自多个引导函数的反馈。第一列展示了修复的提示。第二列展示了分类器引导的修复，在此生成了与修复提示紧密匹配的狗的图像。第三列展示了同时使用分类器和分割引导生成的图像，在掩码区域精确生成了逼真的狗的图像。结果表明我们的算法有效地处理了多个引导函数。
+
+# 5 Conclusion
+
+本文提出了通用引导算法，可以利用任何现成的基于固定基础扩散模型的引导函数执行引导图像生成。我们的算法只需要引导和损失函数是可微的，并避免了对引导函数或基础模型进行重新训练以适应特定类型提示的需求，我们展示了我们的算法在复杂引导（包括分割、人脸识别、物体检测系统）方面有预期的结果，甚至可以结合多个引导函数并同时使用。
