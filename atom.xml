@@ -6,7 +6,7 @@
   <link href="https://resume.kokomi0728.eu.org/atom.xml" rel="self"/>
   
   <link href="https://resume.kokomi0728.eu.org/"/>
-  <updated>2023-12-02T09:08:17.689Z</updated>
+  <updated>2023-12-08T12:37:28.340Z</updated>
   <id>https://resume.kokomi0728.eu.org/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【一院一节】第二届“贡橙杯”CTF竞赛圆满落幕</title>
+    <link href="https://resume.kokomi0728.eu.org/posts/b324fdd1.html"/>
+    <id>https://resume.kokomi0728.eu.org/posts/b324fdd1.html</id>
+    <published>2023-12-04T16:00:00.000Z</published>
+    <updated>2023-12-08T12:37:28.340Z</updated>
+    
+    <content type="html"><![CDATA[<p>【一院一节】第二届“贡橙杯”CTF竞赛圆满落幕</p><span id="more"></span><p>CTF（Capture The Flag，夺旗赛），是网络安全领域技术人员之间进行技术竞技的一种常见比赛形式。第二届“贡橙杯”CTF竞赛由哈尔滨工程大学计算机科学与技术学院主办，网络安全技术社团承办，绿盟科技集团股份有限公司赞助了本次比赛。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;【一院一节】第二届“贡橙杯”CTF竞赛圆满落幕&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="公众号推文" scheme="https://resume.kokomi0728.eu.org/categories/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%A8%E6%96%87/"/>
+    
+    
+    <category term="CTF" scheme="https://resume.kokomi0728.eu.org/tags/CTF/"/>
+    
+  </entry>
   
   <entry>
     <title>Universal-Guided-Diffusion</title>
@@ -441,27 +462,6 @@
     <category term="NLP" scheme="https://resume.kokomi0728.eu.org/tags/NLP/"/>
     
     <category term="信息检索" scheme="https://resume.kokomi0728.eu.org/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Zero-shot</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/a839b106.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/a839b106.html</id>
-    <published>2023-11-11T16:00:00.000Z</published>
-    <updated>2023-11-23T14:15:58.277Z</updated>
-    
-    <content type="html"><![CDATA[<p>“Zero-shot” 是一种指在模型训练阶段未见过特定任务或类别的能力。在这种情况下，模型被要求执行没有直接训练样本的任务。这对于泛化到新领域或新任务非常有用。</p><span id="more"></span><p>举几个例子来说明 zero-shot 的概念：</p><ol><li><p><strong>图像分类：</strong> 假设有一个图像分类模型，经过训练可以识别猫、狗、汽车等类别。如果在测试阶段，模型被要求对一些在训练数据中从未见过的类别，比如大象、飞机进行分类，而它仍能够正确分类，那么这就是 zero-shot 图像分类。</p></li><li><p><strong>文本情感分析：</strong> 假设有一个情感分析模型，它在训练阶段只见过积极和消极的情感类别。如果在测试阶段，模型被要求对一种新的情感类别，比如中立或焦虑进行分类，而它能够适应并进行准确的分类，那么这就是 zero-shot 情感分析。</p></li><li><p><strong>自然语言处理（NLP）中的零样本学习：</strong> 在NLP领域，zero-shot 学习可能涉及到对一些未在训练中见过的主题或任务的理解。例如，一个文本生成模型在训练时只接触到了电影评论，但在测试时可以生成关于体育比赛的文本，而且质量仍然很高，这就是 zero-shot 学习。</p></li></ol><p>Zero-shot 能力通常需要模型具有很强的泛化能力，能够推广到新的情境和任务。在深度学习中，一些预训练的模型（如 GPT、BERT）通过大规模训练来获得广泛的知识，使它们在 zero-shot 或 few-shot 任务上表现出色。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;“Zero-shot” 是一种指在模型训练阶段未见过特定任务或类别的能力。在这种情况下，模型被要求执行没有直接训练样本的任务。这对于泛化到新领域或新任务非常有用。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-    <category term="机器学习" scheme="https://resume.kokomi0728.eu.org/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
