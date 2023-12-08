@@ -4,15 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "cbdebac4c42e46ef",
+        "id": "3cfc4ff99d015c60",
         "type": "tabs",
         "children": [
           {
-            "id": "4362372b68700b71",
+            "id": "3f389f6ba14cd05d",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "_posts/_组会/【组会】2023.12.07.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -65,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "6b347375acaf577b",
@@ -81,6 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "_posts/_组会/【组会】2023.12.07.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "_posts/_组会/【组会】2023.12.07.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +125,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "_posts/_组会/【组会】2023.12.07.md"
+              }
             }
           }
         ]
@@ -138,8 +147,13 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "4362372b68700b71",
+  "active": "3f389f6ba14cd05d",
   "lastOpenFiles": [
+    "_posts/_组会/【组会】2023.10.19.md",
+    "_posts/_组会/【组会】2023.12.07.md",
+    "_posts/_组会/【组会】2023.11.22.md",
+    "_posts/技术学习/【Pytorch笔记】5.DataLoader、Dataset、自定义Dataset.md",
+    "_posts/论文学习/Universal-Guided-Diffusion.md",
     "_posts/知识点/【知识点】TF-IDF算法.md",
     "_posts/技术学习/使用Vscode调试Linux内核.md",
     "_posts/技术学习/使用虚拟机进行基于vscode的Linux内核调试.md"
