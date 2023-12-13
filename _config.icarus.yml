@@ -280,13 +280,13 @@ widgets:
         # Maximum level of headings to show (1-6)
         depth: 3
     # Recommendation links widget configurations
-    # -
+    -
         # Where should the widget be placed, left sidebar or right sidebar
-        # position: left
-        # type: links
+        position: left
+        type: links
         # Names and URLs of the sites
-        # links:
-        #     CSDN: https://blog.csdn.net/qq_26772029
+        links:
+            Scholar Homepage: https://xhd0728.github.io
         #     GitHub: https://github.com/xhd0728
         #     'Email: hdxin2002@gmail.com': mailto://hdxin2002@gmail.com
     # Categories widget configurations
