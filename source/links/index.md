@@ -19,7 +19,7 @@ date: 2023-10-08
 - [Fang Wu ( XMU, Xiamen, Fujian )](https://wfloveiu.github.io/)
 - Hui Ouyang ( BUAA, Beijing)
 - [Haidong Xin ( NEU, Shenyang, Liaoning )](https://resume.kokomi0728.eu.org)
-- [Zihan Xu ( SJTU, Shanghai )](https://codeforces.com/profile/XuZihan)
+- [Zihan Xu ( SJTU, Shanghai )](https://codeforces.com/profile/YoungFrog)
 - [Yuhao Xue ( Tongji University, Shanghai )](https://blog.csdn.net/xhyu61)
 - Chunhao Yang ( ICT，Chinese Academy, Beijing )
 - Qingran Yang ( HIT, Harbin, Heilongjiang)
