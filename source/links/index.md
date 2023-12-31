@@ -7,26 +7,29 @@ date: 2023-10-08
 # 👨‍🎓 Friends
 
 - [Junhao Chen ( THUSZ, Shenzhen, Guangzhou )](http://cjh.asia/)
-- Yian Chen ( HIT, Harbin, Heilongjiang)
-- Hao Fu ( HEU, Harbin, Heilongjiang)
-- Jinlin Hu ( ICT, Chinese Academy, Beijing )
-- Rui Huang ( USTC, Hefei, Anhui)
-- Xiang Li ( PKU, Beijing )
 - [Zhicheng Li ( USTC, Suzhou, Jiangsu )](https://yao9e.cn)
-- Jiaji Qin ( FDU, Shanghai )
-- Jice Sun ( XJTU, Xi'an, Shaanxi)
-- Jingbo Sun ( ICT，Chinese Academy, Beijing)
 - [Fang Wu ( XMU, Xiamen, Fujian )](https://wfloveiu.github.io/)
-- Hui Ouyang ( BUAA, Beijing)
 - [Haidong Xin ( NEU, Shenyang, Liaoning )](https://resume.kokomi0728.eu.org)
 - [Zihan Xu ( SJTU, Shanghai )](https://codeforces.com/profile/YoungFrog)
 - [Yuhao Xue ( Tongji University, Shanghai )](https://blog.csdn.net/xhyu61)
-- Chunhao Yang ( ICT，Chinese Academy, Beijing )
-- Qingran Yang ( HIT, Harbin, Heilongjiang)
 - [Xiaojun Ye ( ZJU, Hangzhou, Jiangsu )](https://scholar.google.com/citations?hl=zh-CN&user=BKMYsm4AAAAJ)
-- Xianyu Zhang ( HEU, Harbin, Heilongjiang )
-- Wentao Zhou ( NWPU, Xi'an, Shaanxi)
-- Zhitong Zhou ( SDU, Qingdao, Shandong)
+
+<details> <summary>no website</summary>
+<li> Yian Chen ( HIT, Harbin, Heilongjiang)</li>
+<li> Hao Fu ( HEU, Harbin, Heilongjiang)</li>
+<li> Jinlin Hu ( ICT, Chinese Academy, Beijing )</li>
+<li> Rui Huang ( USTC, Hefei, Anhui)</li>
+<li> Xiang Li ( PKU, Beijing )</li>
+<li> Jiaji Qin ( FDU, Shanghai )</li>
+<li> Jice Sun ( XJTU, Xi'an, Shaanxi)</li>
+<li> Jingbo Sun ( ICT，Chinese Academy, Beijing)</li>
+<li> Hui Ouyang ( BUAA, Beijing)</li>
+<li> Chunhao Yang ( ICT，Chinese Academy, Beijing )</li>
+<li> Qingran Yang ( HIT, Harbin, Heilongjiang)</li>
+<li> Xianyu Zhang ( HEU, Harbin, Heilongjiang )</li>
+<li> Wentao Zhou ( NWPU, Xi'an, Shaanxi)</li>
+<li> Zhitong Zhou ( SDU, Qingdao, Shandong)</li>
+</details>
 
 # 🏫 School
 

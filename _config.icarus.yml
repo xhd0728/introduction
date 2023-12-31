@@ -253,20 +253,20 @@ widgets:
             Github:
                 icon: fab fa-github
                 url: https://github.com/xhd0728
-            Twitter:
-                icon: fab fa-twitter
-                url: https://twitter.com/xhd0728
+            Google Scholar:
+                icon: fas fa-graduation-cap
+                url: https://scholar.google.com/citations?user=8VCnj3sAAAAJ
             Linkedin:
-                icon: fa-brands fa-linkedin
+                icon: fab fa-linkedin
                 url: https://www.linkedin.com/in/haidongxin
             ResearchGate:
-                icon: fa-brands fa-researchgate
+                icon: fab fa-researchgate
                 url: https://www.researchgate.net/profile/Haidong-Xin
             RSS:
-                icon: fa-solid fa-rss
+                icon: fas fa-rss
                 url: /atom.xml
             Email:
-                icon: fa-regular fa-envelope
+                icon: far fa-envelope
                 url: mailto://hdxin2002@gmail.com
     # Table of contents widget configurations
     -
