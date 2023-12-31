@@ -3,11 +3,11 @@
   <title>Haidong Xin</title>
   
   <subtitle>HomePage of Haidong Xin</subtitle>
-  <link href="https://resume.kokomi0728.eu.org/atom.xml" rel="self"/>
+  <link href="https://xinhaidong.cloudns.org/atom.xml" rel="self"/>
   
-  <link href="https://resume.kokomi0728.eu.org/"/>
+  <link href="https://xinhaidong.cloudns.org/"/>
   <updated>2023-12-08T12:41:51.689Z</updated>
-  <id>https://resume.kokomi0728.eu.org/</id>
+  <id>https://xinhaidong.cloudns.org/</id>
   
   <author>
     <name>Haidong Xin</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>【一院一节】第二届“贡橙杯”CTF竞赛圆满落幕</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/b324fdd1.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/b324fdd1.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/b324fdd1.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/b324fdd1.html</id>
     <published>2023-12-04T16:00:00.000Z</published>
     <updated>2023-12-08T12:41:51.689Z</updated>
     
@@ -30,17 +30,17 @@
     
     
     
-    <category term="公众号推文" scheme="https://resume.kokomi0728.eu.org/categories/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%A8%E6%96%87/"/>
+    <category term="公众号推文" scheme="https://xinhaidong.cloudns.org/categories/%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%A8%E6%96%87/"/>
     
     
-    <category term="CTF" scheme="https://resume.kokomi0728.eu.org/tags/CTF/"/>
+    <category term="CTF" scheme="https://xinhaidong.cloudns.org/tags/CTF/"/>
     
   </entry>
   
   <entry>
     <title>Universal-Guided-Diffusion</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/23f23e19.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/23f23e19.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/23f23e19.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/23f23e19.html</id>
     <published>2023-12-01T16:00:00.000Z</published>
     <updated>2023-12-02T09:08:17.689Z</updated>
     
@@ -51,19 +51,19 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="计算机视觉" scheme="https://resume.kokomi0728.eu.org/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"/>
+    <category term="计算机视觉" scheme="https://xinhaidong.cloudns.org/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"/>
     
-    <category term="扩散模型" scheme="https://resume.kokomi0728.eu.org/tags/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/"/>
+    <category term="扩散模型" scheme="https://xinhaidong.cloudns.org/tags/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/"/>
     
   </entry>
   
   <entry>
     <title>REPLUG: Retrieval-Augmented Black-Box Language Models</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/a8d6c668.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/a8d6c668.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/a8d6c668.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/a8d6c668.html</id>
     <published>2023-11-30T16:00:00.000Z</published>
     <updated>2023-12-01T13:04:30.913Z</updated>
     
@@ -75,17 +75,17 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="信息检索" scheme="https://resume.kokomi0728.eu.org/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/"/>
+    <category term="信息检索" scheme="https://xinhaidong.cloudns.org/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/"/>
     
   </entry>
   
   <entry>
     <title>COCO-LM: Correcting and Contrasting Text Sequences for Language Model Pretraining</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/a5e8b87b.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/a5e8b87b.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/a5e8b87b.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/a5e8b87b.html</id>
     <published>2023-11-24T16:00:00.000Z</published>
     <updated>2023-12-01T13:04:47.613Z</updated>
     
@@ -96,19 +96,19 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="信息检索" scheme="https://resume.kokomi0728.eu.org/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/"/>
+    <category term="信息检索" scheme="https://xinhaidong.cloudns.org/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/"/>
     
-    <category term="预训练模型" scheme="https://resume.kokomi0728.eu.org/tags/%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/"/>
+    <category term="预训练模型" scheme="https://xinhaidong.cloudns.org/tags/%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/"/>
     
   </entry>
   
   <entry>
     <title>字节对编码(BPE)</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/e65f4108.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/e65f4108.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/e65f4108.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/e65f4108.html</id>
     <published>2023-11-22T16:00:00.000Z</published>
     <updated>2023-11-23T14:15:58.282Z</updated>
     
@@ -119,19 +119,19 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="NLP" scheme="https://resume.kokomi0728.eu.org/tags/NLP/"/>
+    <category term="NLP" scheme="https://xinhaidong.cloudns.org/tags/NLP/"/>
     
-    <category term="机器翻译" scheme="https://resume.kokomi0728.eu.org/tags/%E6%9C%BA%E5%99%A8%E7%BF%BB%E8%AF%91/"/>
+    <category term="机器翻译" scheme="https://xinhaidong.cloudns.org/tags/%E6%9C%BA%E5%99%A8%E7%BF%BB%E8%AF%91/"/>
     
   </entry>
   
   <entry>
     <title>Coreference Resolution</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/f0bcdccd.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/f0bcdccd.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/f0bcdccd.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/f0bcdccd.html</id>
     <published>2023-11-20T16:00:00.000Z</published>
     <updated>2023-11-23T14:15:58.249Z</updated>
     
@@ -142,17 +142,17 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="NLP" scheme="https://resume.kokomi0728.eu.org/tags/NLP/"/>
+    <category term="NLP" scheme="https://xinhaidong.cloudns.org/tags/NLP/"/>
     
   </entry>
   
   <entry>
     <title>Masked Language Modeling</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/c581aeed.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/c581aeed.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/c581aeed.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/c581aeed.html</id>
     <published>2023-11-20T16:00:00.000Z</published>
     <updated>2023-11-23T14:15:58.269Z</updated>
     
@@ -163,17 +163,17 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="NLP" scheme="https://resume.kokomi0728.eu.org/tags/NLP/"/>
+    <category term="NLP" scheme="https://xinhaidong.cloudns.org/tags/NLP/"/>
     
   </entry>
   
   <entry>
     <title>预热</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/fc31d48b.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/fc31d48b.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/fc31d48b.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/fc31d48b.html</id>
     <published>2023-11-20T16:00:00.000Z</published>
     <updated>2023-11-23T14:15:58.291Z</updated>
     
@@ -184,17 +184,17 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="机器学习" scheme="https://resume.kokomi0728.eu.org/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="机器学习" scheme="https://xinhaidong.cloudns.org/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>GeLU</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/2e561321.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/2e561321.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/2e561321.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/2e561321.html</id>
     <published>2023-11-19T16:00:00.000Z</published>
     <updated>2023-11-23T14:15:58.265Z</updated>
     
@@ -205,19 +205,19 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="机器学习" scheme="https://resume.kokomi0728.eu.org/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="机器学习" scheme="https://xinhaidong.cloudns.org/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="数学" scheme="https://resume.kokomi0728.eu.org/tags/%E6%95%B0%E5%AD%A6/"/>
+    <category term="数学" scheme="https://xinhaidong.cloudns.org/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
   <entry>
     <title>双序列采样</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/b3b84358.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/b3b84358.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/b3b84358.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/b3b84358.html</id>
     <published>2023-11-19T16:00:00.000Z</published>
     <updated>2023-11-23T14:15:58.280Z</updated>
     
@@ -228,19 +228,19 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="NLP" scheme="https://resume.kokomi0728.eu.org/tags/NLP/"/>
+    <category term="NLP" scheme="https://xinhaidong.cloudns.org/tags/NLP/"/>
     
-    <category term="信息检索" scheme="https://resume.kokomi0728.eu.org/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/"/>
+    <category term="信息检索" scheme="https://xinhaidong.cloudns.org/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/"/>
     
   </entry>
   
   <entry>
     <title>线性预热</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/50e93fc8.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/50e93fc8.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/50e93fc8.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/50e93fc8.html</id>
     <published>2023-11-19T16:00:00.000Z</published>
     <updated>2023-11-23T14:15:58.286Z</updated>
     
@@ -251,17 +251,17 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="机器学习" scheme="https://resume.kokomi0728.eu.org/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="机器学习" scheme="https://xinhaidong.cloudns.org/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>使用Vscode调试Linux内核</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/c45db453.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/c45db453.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/c45db453.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/c45db453.html</id>
     <published>2023-11-18T16:00:00.000Z</published>
     <updated>2023-11-24T06:57:15.498Z</updated>
     
@@ -272,19 +272,19 @@
     
     
     
-    <category term="技术学习" scheme="https://resume.kokomi0728.eu.org/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
+    <category term="技术学习" scheme="https://xinhaidong.cloudns.org/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="Linux" scheme="https://resume.kokomi0728.eu.org/tags/Linux/"/>
+    <category term="Linux" scheme="https://xinhaidong.cloudns.org/tags/Linux/"/>
     
-    <category term="C/C++" scheme="https://resume.kokomi0728.eu.org/tags/C-C/"/>
+    <category term="C/C++" scheme="https://xinhaidong.cloudns.org/tags/C-C/"/>
     
   </entry>
   
   <entry>
     <title>使用虚拟机进行基于qemu和gdb的Linux内核调试</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/6c03d805.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/6c03d805.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/6c03d805.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/6c03d805.html</id>
     <published>2023-11-17T16:00:00.000Z</published>
     <updated>2023-11-24T06:56:47.586Z</updated>
     
@@ -295,19 +295,19 @@
     
     
     
-    <category term="技术学习" scheme="https://resume.kokomi0728.eu.org/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
+    <category term="技术学习" scheme="https://xinhaidong.cloudns.org/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="Linux" scheme="https://resume.kokomi0728.eu.org/tags/Linux/"/>
+    <category term="Linux" scheme="https://xinhaidong.cloudns.org/tags/Linux/"/>
     
-    <category term="C/C++" scheme="https://resume.kokomi0728.eu.org/tags/C-C/"/>
+    <category term="C/C++" scheme="https://xinhaidong.cloudns.org/tags/C-C/"/>
     
   </entry>
   
   <entry>
     <title>TF-IDF</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/d7d7e9a3.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/d7d7e9a3.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/d7d7e9a3.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/d7d7e9a3.html</id>
     <published>2023-11-16T16:00:00.000Z</published>
     <updated>2023-11-23T14:15:58.274Z</updated>
     
@@ -318,19 +318,19 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="NLP" scheme="https://resume.kokomi0728.eu.org/tags/NLP/"/>
+    <category term="NLP" scheme="https://xinhaidong.cloudns.org/tags/NLP/"/>
     
-    <category term="信息检索" scheme="https://resume.kokomi0728.eu.org/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/"/>
+    <category term="信息检索" scheme="https://xinhaidong.cloudns.org/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/"/>
     
   </entry>
   
   <entry>
     <title>torch.nn (Convolution Layers)</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/7a1e28a0.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/7a1e28a0.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/7a1e28a0.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/7a1e28a0.html</id>
     <published>2023-11-14T16:00:00.000Z</published>
     <updated>2023-12-01T09:33:11.845Z</updated>
     
@@ -341,19 +341,19 @@
     
     
     
-    <category term="技术学习" scheme="https://resume.kokomi0728.eu.org/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
+    <category term="技术学习" scheme="https://xinhaidong.cloudns.org/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="PyTorch" scheme="https://resume.kokomi0728.eu.org/tags/PyTorch/"/>
+    <category term="PyTorch" scheme="https://xinhaidong.cloudns.org/tags/PyTorch/"/>
     
-    <category term="机器学习" scheme="https://resume.kokomi0728.eu.org/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="机器学习" scheme="https://xinhaidong.cloudns.org/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>嵌入坍缩</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/3c1401a1.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/3c1401a1.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/3c1401a1.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/3c1401a1.html</id>
     <published>2023-11-12T16:00:00.000Z</published>
     <updated>2023-11-23T14:15:58.251Z</updated>
     
@@ -364,19 +364,19 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="NLP" scheme="https://resume.kokomi0728.eu.org/tags/NLP/"/>
+    <category term="NLP" scheme="https://xinhaidong.cloudns.org/tags/NLP/"/>
     
-    <category term="信息检索" scheme="https://resume.kokomi0728.eu.org/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/"/>
+    <category term="信息检索" scheme="https://xinhaidong.cloudns.org/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/"/>
     
   </entry>
   
   <entry>
     <title>GLUE</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/9f7dd732.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/9f7dd732.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/9f7dd732.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/9f7dd732.html</id>
     <published>2023-11-12T16:00:00.000Z</published>
     <updated>2023-11-23T14:15:58.263Z</updated>
     
@@ -387,19 +387,19 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="NLP" scheme="https://resume.kokomi0728.eu.org/tags/NLP/"/>
+    <category term="NLP" scheme="https://xinhaidong.cloudns.org/tags/NLP/"/>
     
-    <category term="信息检索" scheme="https://resume.kokomi0728.eu.org/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/"/>
+    <category term="信息检索" scheme="https://xinhaidong.cloudns.org/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/"/>
     
   </entry>
   
   <entry>
     <title>L1正则化</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/18e73c3c.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/18e73c3c.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/18e73c3c.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/18e73c3c.html</id>
     <published>2023-11-12T16:00:00.000Z</published>
     <updated>2023-11-23T14:15:58.266Z</updated>
     
@@ -410,19 +410,19 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="机器学习" scheme="https://resume.kokomi0728.eu.org/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="机器学习" scheme="https://xinhaidong.cloudns.org/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="数学" scheme="https://resume.kokomi0728.eu.org/tags/%E6%95%B0%E5%AD%A6/"/>
+    <category term="数学" scheme="https://xinhaidong.cloudns.org/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
   <entry>
     <title>L2归一化</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/ff9e5701.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/ff9e5701.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/ff9e5701.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/ff9e5701.html</id>
     <published>2023-11-12T16:00:00.000Z</published>
     <updated>2023-11-23T14:15:58.268Z</updated>
     
@@ -433,19 +433,19 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="机器学习" scheme="https://resume.kokomi0728.eu.org/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="机器学习" scheme="https://xinhaidong.cloudns.org/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="数学" scheme="https://resume.kokomi0728.eu.org/tags/%E6%95%B0%E5%AD%A6/"/>
+    <category term="数学" scheme="https://xinhaidong.cloudns.org/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
   <entry>
     <title>NLI</title>
-    <link href="https://resume.kokomi0728.eu.org/posts/d68980e5.html"/>
-    <id>https://resume.kokomi0728.eu.org/posts/d68980e5.html</id>
+    <link href="https://xinhaidong.cloudns.org/posts/d68980e5.html"/>
+    <id>https://xinhaidong.cloudns.org/posts/d68980e5.html</id>
     <published>2023-11-12T16:00:00.000Z</published>
     <updated>2023-11-23T14:15:58.270Z</updated>
     
@@ -456,12 +456,12 @@
     
     
     
-    <category term="论文学习" scheme="https://resume.kokomi0728.eu.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    <category term="论文学习" scheme="https://xinhaidong.cloudns.org/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="NLP" scheme="https://resume.kokomi0728.eu.org/tags/NLP/"/>
+    <category term="NLP" scheme="https://xinhaidong.cloudns.org/tags/NLP/"/>
     
-    <category term="信息检索" scheme="https://resume.kokomi0728.eu.org/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/"/>
+    <category term="信息检索" scheme="https://xinhaidong.cloudns.org/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/"/>
     
   </entry>
   
